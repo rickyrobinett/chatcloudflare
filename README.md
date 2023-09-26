@@ -1,4 +1,4 @@
-# ChatCloduflare
+# ChatCloudflare
 
 Want to give Cloudflare Workers AI a try? This repo can help you get started quickly with a chat application built using Next.js, Tailwindcss and Workers AI. Based on ![Nashex's wonderful GPT-4 Playground repo](https://github.com/Nashex/gpt4-playground).
 
