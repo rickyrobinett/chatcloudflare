@@ -1,4 +1,4 @@
-import { useOpenAI } from "@/context/OpenAIProvider";
+import { useCloudflare } from "@/context/CloudflareProvider";
 import {
   Conversation as ConversationT,
   getConversation,
@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function Conversation({ id, conversation }: Props) {
-  const { loadConversation } = useOpenAI();
+  const { loadConversation } = useCloudflare();
 
   const handleClick = () => {
     // Get the conversation from the history

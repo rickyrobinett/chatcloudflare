@@ -1,4 +1,4 @@
-import { OpenAIChatMessage, OpenAIConfig, OpenAISystemMessage } from "./OpenAI";
+import { CloudflareChatMessage, CloudflareConfig, CloudflareSystemMessage } from "./Cloudflare";
 import { v4 as uuidv4 } from "uuid";
 
 const HISTORY_KEY = "pg-history";
@@ -8,9 +8,9 @@ export type Conversation = {
   name: string;
   lastMessage: number; // Unix timestamp
 
-  systemMessage: OpenAISystemMessage;
-  messages: OpenAIChatMessage[];
-  config: OpenAIConfig;
+  systemMessage: CloudflareSystemMessage;
+  messages: CloudflareChatMessage[];
+  config: CloudflareConfig;
 };
 
 export type History = Record<string, Conversation>;

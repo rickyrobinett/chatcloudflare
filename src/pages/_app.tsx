@@ -1,5 +1,5 @@
 import { AuthProvider } from "@/context/AuthProvider";
-import OpenAIProvider from "@/context/OpenAIProvider";
+import OpenAIProvider from "@/context/CloudflareProvider";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { Analytics } from "@vercel/analytics/react";

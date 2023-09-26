@@ -8,7 +8,7 @@ import {
   MdDriveFileRenameOutline,
 } from "react-icons/md";
 import { Conversation as ConversationI } from "@/utils/History";
-import { useOpenAI } from "@/context/OpenAIProvider";
+import { useCloudflare } from "@/context/CloudflareProvider";
 
 type Props = {
   id: string;
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export default function Conversation({ id, conversation, active }: Props) {
-  const { updateConversationName, deleteConversation } = useOpenAI();
+  const { updateConversationName, deleteConversation } = useCloudflare();
 
   const [editing, setEditing] = React.useState(false);
   const [name, setName] = React.useState(

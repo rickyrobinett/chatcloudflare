@@ -59,49 +59,6 @@ export default function AssistantMessageContent({ content, ...props }: Props) {
         </pre>
       );
     },
-
-    math: (props: any) => <MathJax.Node formula={props.value} />,
-    inlineMath: (props: any) => <MathJax.Node inline formula={props.value} />,
-
-    code({ node, inline, className, ...props }: any) {
-      const hasLang = /language-(\w+)/.exec(className || "");
-      const hasMeta = node?.data?.meta;
-
-      const applyHighlights: object = (applyHighlights: number) => {
-        if (hasMeta) {
-          const RE = /{([\d,-]+)}/;
-          const metadata = node.data.meta?.replace(/\s/g, "");
-          const strlineNumbers = RE?.test(metadata)
-            ? RE?.exec(metadata)?.[1]
-            : "0";
-          const highlightLines = rangeParser(strlineNumbers || "0");
-          const highlight = highlightLines;
-          const data: string = highlight.includes(applyHighlights)
-            ? "highlight"
-            : "";
-          return { data };
-        } else {
-          return {};
-        }
-      };
-
-      return hasLang ? (
-        <SyntaxHighlighter
-          style={syntaxTheme}
-          language={hasLang[1]}
-          PreTag="div"
-          className="overflow-hidden rounded-md"
-          showLineNumbers={true}
-          wrapLines={hasMeta}
-          useInlineStyles={true}
-          lineProps={applyHighlights}
-        >
-          {props.children}
-        </SyntaxHighlighter>
-      ) : (
-        <code className={className} {...props} />
-      );
-    },
   };
 
   return (

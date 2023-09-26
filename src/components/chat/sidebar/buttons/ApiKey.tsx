@@ -1,7 +1,6 @@
 import React from "react";
 import { useAuth } from "@/context/AuthProvider";
 import { MdContentCopy, MdDelete } from "react-icons/md";
-import AddTokenModal from "./../../../auth/AddTokenModal";
 
 type Props = {};
 
@@ -39,7 +38,7 @@ export default function ApiKey({}: Props) {
           </div>
         </div>
       ) : (
-        <AddTokenModal className="w-full bg-primary p-1 text-left hover:bg-secondary" />
+        <div />
       )}
     </div>
   );

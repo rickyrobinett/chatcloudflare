@@ -1,4 +1,4 @@
-import { useOpenAI } from "@/context/OpenAIProvider";
+import { useCloudflare } from "@/context/CloudflareProvider";
 import { usePlayground } from "@/context/PlaygroundProvider";
 import { Transition } from "@headlessui/react";
 import React from "react";
@@ -9,7 +9,7 @@ type Props = {};
 
 export default function PlaygroundCoversations({}: Props) {
   const { showConversations, toggleShowConversations } = usePlayground();
-  const { conversations } = useOpenAI();
+  const { conversations } = useCloudflare();
 
   return (
     <Transition

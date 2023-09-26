@@ -1,11 +1,11 @@
-import { useOpenAI } from "@/context/OpenAIProvider";
-import { OpenAIChatMessage } from "@/utils/OpenAI";
+import { useCloudflare } from "@/context/CloudflareProvider";
+import { CloudflareChatMessage } from "@/utils/Cloudflare";
 import React from "react";
 import { MdOutlineCancel } from "react-icons/md";
 import { usePlayground } from "@/context/PlaygroundProvider";
 
 type Props = {
-  message: OpenAIChatMessage;
+  message: CloudflareChatMessage;
 };
 
 export default function PlaygroundMessage({
@@ -16,7 +16,7 @@ export default function PlaygroundMessage({
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
 
   const { updateMessageContent, removeMessage, toggleMessageRole } =
-    useOpenAI();
+    useCloudflare();
 
   const handleContentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (e.target.value === content || id === undefined) return;

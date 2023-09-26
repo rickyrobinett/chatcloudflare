@@ -1,12 +1,12 @@
-import { useOpenAI } from "@/context/OpenAIProvider";
-import { OpenAIChatMessage } from "@/utils/OpenAI";
+import { useCloudflare } from "@/context/CloudflareProvider";
+import { CloudflareChatMessage } from "@/utils/Cloudflare";
 import React from "react";
 import { MdPerson, MdSmartToy } from "react-icons/md";
 import AssistantMessageContent from "./AssistantMessageContent";
 import UserMessageContent from "./UserMessageContent";
 
 type Props = {
-  message: OpenAIChatMessage;
+  message: CloudflareChatMessage;
 };
 
 export default function ChatMessage({ message: { id, role, content } }: Props) {

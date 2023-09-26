@@ -9,11 +9,10 @@ import {
 } from "@/utils/History";
 import {
   defaultConfig,
-  OpenAIChatMessage,
-  OpenAIConfig,
-  OpenAISystemMessage,
-  OpenAIChatModels
-} from "@/utils/OpenAI";
+  CloudflareChatMessage,
+  CloudflareConfig,
+  CloudflareSystemMessage,
+} from "@/utils/Cloudflare";
 import React, { PropsWithChildren, useCallback, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useAuth } from "@/context/AuthProvider";
@@ -24,9 +23,9 @@ const defaultContext = {
   systemMessage: {
     role: "system",
     content: "You are a helpful AI chatbot.",
-  } as OpenAISystemMessage,
-  messages: [] as OpenAIChatMessage[],
-  config: defaultConfig as OpenAIConfig,
+  } as CloudflareSystemMessage,
+  messages: [] as CloudflareChatMessage[],
+  config: defaultConfig as CloudflareConfig,
   updateSystemMessage: (content: string) => {},
   addMessage: () => {},
   removeMessage: (id: number) => {},
@@ -40,16 +39,16 @@ const defaultContext = {
   loadConversation: (id: string, conversation: Conversation) => {},
   toggleMessageRole: (id: number) => {},
   updateMessageContent: (id: number, content: string) => {},
-  updateConfig: (newConfig: Partial<OpenAIConfig>) => {},
+  updateConfig: (newConfig: Partial<CloudflareConfig>) => {},
   submit: () => {},
   loading: true,
   error: "",
 };
 
-const OpenAIContext = React.createContext<{
-  systemMessage: OpenAISystemMessage;
-  messages: OpenAIChatMessage[];
-  config: OpenAIConfig;
+const CloudflareContext = React.createContext<{
+  systemMessage: CloudflareSystemMessage;
+  messages: CloudflareChatMessage[];
+  config: CloudflareConfig;
   updateSystemMessage: (content: string) => void;
   addMessage: (
     content?: string,
@@ -67,13 +66,13 @@ const OpenAIContext = React.createContext<{
   loadConversation: (id: string, conversation: Conversation) => void;
   toggleMessageRole: (id: number) => void;
   updateMessageContent: (id: number, content: string) => void;
-  updateConfig: (newConfig: Partial<OpenAIConfig>) => void;
+  updateConfig: (newConfig: Partial<CloudflareConfig>) => void;
   submit: () => void;
   loading: boolean;
   error: string;
 }>(defaultContext);
 
-export default function OpenAIProvider({ children }: PropsWithChildren) {
+export default function CloudflareProvider({ children }: PropsWithChildren) {
   const { token } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = React.useState(false);
@@ -85,11 +84,11 @@ export default function OpenAIProvider({ children }: PropsWithChildren) {
   );
   const [conversationId, setConversationId] = React.useState<string>("");
   const [conversationName, setConversationName] = React.useState("");
-  const [systemMessage, setSystemMessage] = React.useState<OpenAISystemMessage>(
+  const [systemMessage, setSystemMessage] = React.useState<CloudflareSystemMessage>(
     defaultContext.systemMessage
   );
-  const [config, setConfig] = React.useState<OpenAIConfig>(defaultConfig);
-  const [messages, setMessages] = React.useState<OpenAIChatMessage[]>([]);
+  const [config, setConfig] = React.useState<CloudflareConfig>(defaultConfig);
+  const [messages, setMessages] = React.useState<CloudflareChatMessage[]>([]);
 
   // Load conversation from local storage
   useEffect(() => {
@@ -125,14 +124,9 @@ export default function OpenAIProvider({ children }: PropsWithChildren) {
     });
   };
 
-  const updateConfig = (newConfig: Partial<OpenAIConfig>) => {
+  const updateConfig = (newConfig: Partial<CloudflareConfig>) => {
     setConfig((prev) => {
-      // If model changes set max tokens to half of the model's max tokens
-      if (newConfig.model && newConfig.model !== prev.model) {
-        newConfig.max_tokens = Math.floor(
-          OpenAIChatModels[newConfig.model].maxLimit / 2
-        );
-      }
+      
 
       return {
         ...prev,
@@ -236,7 +230,7 @@ export default function OpenAIProvider({ children }: PropsWithChildren) {
   };
 
   const submit = useCallback(
-    async (messages_: OpenAIChatMessage[] = []) => {
+    async (messages_: CloudflareChatMessage[] = []) => {
       if (loading) return;
       setLoading(true);
 
@@ -282,7 +276,7 @@ export default function OpenAIProvider({ children }: PropsWithChildren) {
           id: messages_.length,
           role: "assistant",
           content: "",
-        } as OpenAIChatMessage;
+        } as CloudflareChatMessage;
 
         setMessages((prev) => {
           message.id = prev.length;
@@ -328,7 +322,7 @@ export default function OpenAIProvider({ children }: PropsWithChildren) {
             id: prev.length,
             role,
             content: content || "",
-          } as OpenAIChatMessage,
+          } as CloudflareChatMessage,
         ];
         submit_ && submit(messages);
         return messages;
@@ -375,8 +369,8 @@ export default function OpenAIProvider({ children }: PropsWithChildren) {
   );
 
   return (
-    <OpenAIContext.Provider value={value}>{children}</OpenAIContext.Provider>
+    <CloudflareContext.Provider value={value}>{children}</CloudflareContext.Provider>
   );
 }
 
-export const useOpenAI = () => React.useContext(OpenAIContext);
+export const useCloudflare = () => React.useContext(CloudflareContext);

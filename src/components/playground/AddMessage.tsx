@@ -1,11 +1,11 @@
-import { useOpenAI } from "@/context/OpenAIProvider";
+import { useCloudflare } from "@/context/CloudflareProvider";
 import React from "react";
 import { MdAddCircleOutline } from "react-icons/md";
 
 type Props = {};
 
 export default function AddMessage({}: Props) {
-  const { addMessage } = useOpenAI();
+  const { addMessage } = useCloudflare();
 
   return (
     <button

@@ -4,11 +4,11 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
 import { getConversation } from "./../../utils/History";
-import { useOpenAI } from "@/context/OpenAIProvider";
+import { useCloudflare } from "@/context/CloudflareProvider";
 import ChatHeader from "./../../components/chat/ChatHeader";
 
 export default function Chat() {
-  const { loadConversation, conversationId } = useOpenAI();
+  const { loadConversation, conversationId } = useCloudflare();
   const { id } = useRouter().query;
 
   React.useEffect(() => {
@@ -30,7 +30,7 @@ export default function Chat() {
   return (
     <React.Fragment>
       <Head>
-        <title>OpenAI</title>
+        <title>ChatCloudflare</title>
         <meta name="description" content="A clone of OpenAI playground." />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />

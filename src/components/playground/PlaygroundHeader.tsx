@@ -1,13 +1,12 @@
-import { useOpenAI } from "@/context/OpenAIProvider";
+import { useCloudflare } from "@/context/CloudflareProvider";
 import Link from "next/link";
 import React from "react";
 import { MdChatBubbleOutline } from "react-icons/md";
-import AddTokenModal from "./../auth/AddTokenModal";
 
 type Props = {};
 
 export default function Header({}: Props) {
-  const { conversationId } = useOpenAI();
+  const { conversationId } = useCloudflare();
 
   return (
     <div className="z-50 flex h-[60px] flex-row items-center justify-between border-b border-gray-300 bg-white px-4">
@@ -20,7 +19,6 @@ export default function Header({}: Props) {
         >
           <MdChatBubbleOutline />
         </Link>
-        <AddTokenModal className="py-2" />
       </div>
     </div>
   );

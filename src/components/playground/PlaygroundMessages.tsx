@@ -1,4 +1,4 @@
-import { useOpenAI } from "@/context/OpenAIProvider";
+import { useCloudflare } from "@/context/CloudflareProvider";
 import React, { useEffect } from "react";
 import AddMessage from "./AddMessage";
 import PlaygroundMessage from "./PlaygroundMessage";
@@ -9,7 +9,7 @@ type Props = {};
 
 export default function PlaygroundMessages({}: Props) {
   const { toggleShowConversations } = usePlayground();
-  const { messages, loading, submit } = useOpenAI();
+  const { messages, loading, submit } = useCloudflare();
   const messageContainer = React.useRef<HTMLDivElement>(null);
   const [prevMessageLength, setPrevMessageLength] = React.useState(0);
   const [scrolling, setScrolling] = React.useState(false);

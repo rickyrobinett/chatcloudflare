@@ -1,11 +1,11 @@
 import React from "react";
-import { useOpenAI } from "@/context/OpenAIProvider";
+import { useCloudflare } from "@/context/CloudflareProvider";
 import { MdSend } from "react-icons/md";
 
 type Props = {};
 
 export default function ChatInput({}: Props) {
-  const { addMessage, loading } = useOpenAI();
+  const { addMessage, loading } = useCloudflare();
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
 
   const [input, setInput] = React.useState("");

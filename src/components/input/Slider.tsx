@@ -1,5 +1,5 @@
 import React from "react";
-import { OpenAIConfig } from "@/utils/OpenAI";
+import { CloudflareConfig } from "@/utils/Cloudflare";
 import ReactSlider from "react-slider";
 
 type Props = {
