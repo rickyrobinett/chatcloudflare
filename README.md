@@ -1,16 +1,15 @@
-# GPT-4 Playground
+# ChatCloduflare
 
-Just got your GPT-4 API Key and want to give it a spin? Look not further! This project is mainly targeted to allow you to test out your Open AI API keys. The current OpenAI Playground still only allows 4096 tokens for 8k or 32k models like GPT-4 and if you would like to test out you key in a rendered chat environment you would have to purchase ChatCPT Plus. This project should fix both of those issues without comprimising on either experience. The project aims to preserve as much of the vanilla experience as possible while also providing a link between the the playground and ChatGPT to enable a better developer experience.
-
-As a side note, all API keys are encrypted and stored in your browser's local storage, so you can use this project without having to worry about your API key being stolen.
+Want to give Cloudflare Workers AI a try? This repo can help you get started quickly with a chat application built using Next.js, Tailwindcss and Workers AI. Based on ![Nashex's wonderful GPT-4 Playground repo](https://github.com/Nashex/gpt4-playground).
 
 ## Demo
 
 ### Mock ChatGPT Environment
-This environment has most of the critical features like conversation history (which is stored locally), prompting, and multiple conversations. This environment is a great way to test out your API key and see how it works!
+This environment has most of the critical features like conversation history (which is stored locally), prompting, and multiple conversations. This environment is a great way to see what kind of responses!
 ![ChatGpt-4 ChatGPT](https://i.imgur.com/DfTbV9d.png)
 
 ### Playground Environment
+This environment lets you test out different system prompts and see how they shift the responses you'll get from Workers AI.
 ![ChatGpt-4 Playground](https://i.imgur.com/DS6NPH2.png)
 
 ## Running Locally
@@ -18,10 +17,23 @@ To run this project locally, you will need to have [Node.js](https://nodejs.org/
 
 ```bash
 yarn install
-yarn dev
+npx @cloudflare/next-on-pages
+npx wrangler pages dev .vercel/output/static --compatibility-flag=nodejs_compat --binding CLOUDFLARE_ACCOUNT_ID=%YOURCLOUDFLAREACCOUNT% CLOUDFLARE_API_KEY=%YOURCLOUDFLAREAPIKEY%
 ```
 
-This will start a local server on port 3000. You can then navigate to `localhost:3000` to view the project!
+This will start a local server on port 8788. You can then navigate to `http://127.0.0.1:8788` to view the project!
+
+## Deploying to Cloudflare Pages
+
+You can deploy this applicatin to Cloudflare Pages by running the following commands:
+
+```bash
+npx @cloudflare/next-on-pages
+npx wrangler pages deploy .vercel/output/static
+```
+
+Once this project is created, you'll need to add your environment variables for CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_KEY in the Cloudflare dash under this project's settings. You'll also need to add the `nodejs_compat` compatibility flag under this project's settings within the Settings->Functions section in the Cloudflare dash.
+
 
 ## Contributing
 
