@@ -43,8 +43,8 @@ export default async function handler(
   };
 
   try {
-    const res = await getCloudflareCompletion(token, payload);
-    return new Response(res);
+    const stream = await getCloudflareCompletion(token, payload);
+    return new Response(stream);
   } catch (e: any) {
     return new Response(e.message || "Error fetching response.", {
       status: 500,
